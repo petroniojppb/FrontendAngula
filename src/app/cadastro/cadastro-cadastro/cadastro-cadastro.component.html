@@ -1,0 +1,45 @@
+<div class="container">
+
+    <form (ngSubmit)="salvar(fForm)" #fForm="ngForm">
+
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <h1>{{ editando ? 'Editar' : 'Novo' }} Ideia</h1>
+            </div>
+
+            <div class="ui-g-12 ui-fluid form-group">
+                <label lass="form-control-label">Nome</label>
+                <input pInputText type="text" name="nome2" [(ngModel)]="cadastrar.nome">
+            </div>
+            <div class="ui-g-6 ui-md-3 ui-fluid form-group">
+                <label lass="form-control-label">Viabilidade</label>
+                <p-dropdown [options]="viabilidade" required placeholder="Selecione" name="viabilidade2" [(ngModel)]="cadastrar.viabilidade">
+                </p-dropdown>
+            </div>
+            <div class="ui-g-6 ui-md-3 ui-fluid form-group">
+                <label lass="form-control-label">Situação</label>
+                <p-dropdown [options]="situacao" required placeholder="Selecione" name="situacao2" [(ngModel)]="cadastrar.situacao"></p-dropdown>
+            </div>
+            <div class="ui-g-12 ui-fluid form-group">
+                <label lass="form-control-label">Descrição</label>
+                <textarea [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize" name="descricao" ngModel
+                    #descricao="ngModel" required minlength="5" [(ngModel)]="cadastrar.descricao"
+                    name="descricao2"></textarea>
+                <div *ngIf="descricao.hasError('required') && descricao.dirty" class="ui-message ui-messages-error">
+                    Informe uma descrição
+                </div>
+                <div *ngIf="descricao.hasError('minlength') && descricao.dirty" class="ui-message ui-messages-error">
+                    Minimo de 5 caracteres
+                </div>
+            </div>
+            
+            <div class="ui-g-12">
+                <button pButton type="submit" label="Salvar" [disabled]="fForm.invalid" style="margin-right: 10px;"></button>
+                <button pButton type="button" label="Limpar" (click)="fForm.reset()" class="ui-button-danger" style="margin-right: 10px;"></button>
+                <a routerLink="/ideias" >Voltar para a pesquisa</a>
+              </div>
+        </div>
+
+    </form>
+
+</div>
